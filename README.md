@@ -166,7 +166,8 @@ SELECT AVG(REPLACE(Annual_Income, '$', '') + 0) AS avg_income FROM Car_sales;
 
 1.4 How many customers have an annual income above $100,000?
 ```sql
-SELECT COUNT(*) AS high_income_customers FROM Car_sales WHERE REPLACE(Annual_Income, '$', '') + 0) > 100000;
+SELECT COUNT(*) AS high_income_customers
+FROM Car_sales WHERE REPLACE(Annual_Income, '$', '') + 0) > 100000;
 ```
 
 1.5 Which customer has the highest annual income?
