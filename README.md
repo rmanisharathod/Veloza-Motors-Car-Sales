@@ -310,6 +310,7 @@ This SQL project provided valuable insights into customer demographics, sales tr
 - SUVs and automatic transmission cars are in high demand.
 - Top-performing dealers and regions drive major sales.
 - Certain car colors and models are consistently preferred.
+
 These insights help in strategic planning, inventory management, and marketing decisions.
 
 
