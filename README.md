@@ -103,44 +103,44 @@ This step ensures data integrity by eliminating incomplete records that could af
 3. Data Exploration
 After completing the data cleaning process, we conducted an initial data exploration using SQL queries to gain insights into key aspects of the dataset. The following SQL commands were executed:  
 
- 3.1 Total number of car sales records
-  ```sql
-   SELECT COUNT(*) AS Total_Cars FROM Car_sales;
-  ```
+3.1 Total number of car sales records
+```sql
+SELECT COUNT(*) AS Total_Cars FROM Car_sales;
+```
 
- 3.2 Unique number of customers  
-  ```sql
-   SELECT COUNT(DISTINCT Customer_Name) AS Unique_Customers FROM Car_sales;
-  ```
+3.2 Unique number of customers  
+```sql
+SELECT COUNT(DISTINCT Customer_Name) AS Unique_Customers FROM Car_sales;
+```
 
- 3.3 Unique number of dealers
-  ```sql
-   SELECT DISTINCT Dealer_Name FROM Car_sales;
-  ```
+3.3 Unique number of dealers
+```sql
+SELECT DISTINCT Dealer_Name FROM Car_sales;
+```
 
- 3.4 Unique number of car companies
-  ```sql
-   SELECT DISTINCT Company FROM Car_sales;
-  ```
+3.4 Unique number of car companies
+```sql
+SELECT DISTINCT Company FROM Car_sales;
+```
 
- 3.5 Unique number of car models
-  ```sql
-   SELECT DISTINCT Model FROM Car_sales;
-  ```
+3.5 Unique number of car models
+```sql
+SELECT DISTINCT Model FROM Car_sales;
+```
 
- 3.6 Unique number of car colors
-  ```sql
-   SELECT DISTINCT Color FROM Car_sales;
-  ```
- 3.7 Unique number of car body styles
-  ```sql
-   SELECT DISTINCT Body_Style FROM Car_sales;
-  ```
+3.6 Unique number of car colors
+```sql
+SELECT DISTINCT Color FROM Car_sales;
+```
+3.7 Unique number of car body styles
+```sql
+SELECT DISTINCT Body_Style FROM Car_sales;
+```
 
 3.8 Unique number of dealer regions
- ```sql
-  SELECT DISTINCT Dealer_Region FROM Car_sales;
- ```
+```sql
+SELECT DISTINCT Dealer_Region FROM Car_sales;
+```
 
 This exploration provided an overview of the dataset's structure, including the number of distinct customers, dealers, car companies, models, colors, body styles, and dealer regions. These insights served as a foundation for further in-depth analysis.
 
@@ -161,18 +161,18 @@ SELECT Gender, COUNT(*) AS customer_count FROM Car_sales GROUP BY Gender;
 
 1.3 What is the average annual income of customers?
 ```sql
-SELECT AVG(Annual_Income) AS avg_income FROM Car_sales;
+SELECT AVG(REPLACE(Annual_Income, '$', '') + 0) AS avg_income FROM Car_sales;
 ```
 
 1.4 How many customers have an annual income above $100,000?
 ```sql
-SELECT COUNT(*) AS high_income_customers FROM Car_sales WHERE Annual_Income > 100000;
+SELECT COUNT(*) AS high_income_customers FROM Car_sales WHERE REPLACE(Annual_Income, '$', '') + 0) > 100000;
 ```
 
 1.5 Which customer has the highest annual income?
 ```sql
 SELECT Customer_Name, Annual_Income FROM Car_sales 
-ORDER BY Annual_Income DESC LIMIT 1;
+ORDER BY REPLACE (Annual_Income, '$", '') + 0 DESC LIMIT 1;
 ```
 
 1.6 What is the total number of cars purchased per customer?  
@@ -196,19 +196,19 @@ HAVING COUNT(*) > 1;
 
 2.1 What is the total revenue generated from car sales?
 ```sql
-SELECT SUM(Price) AS total_revenue FROM Car_sales;
+SELECT SUM(REPLACE(Price, '$', '') + 0) AS total_revenue FROM Car_sales;
 ```
 
 2.2 What is the average price of a car in the dataset?
 ```sql
-SELECT AVG(Price) AS avg_price FROM Car_sales;
+SELECT AVG(REPLACE(Price, '$', '') + 0) AS avg_price FROM Car_sales;
 ```
 
 2.3 What is the highest and lowest car price in the dataset?
 ```sql
 SELECT 
-    MAX(Price) AS max_price, 
-    MIN(Price) AS min_price 
+    MAX(Replace(Price, '$', '') + 0) AS max_car_price, 
+    MIN(REPLACE(Price, '$', '') + 0) AS min_car_price 
 FROM Car_sales;
 ```
 
@@ -234,7 +234,7 @@ SELECT Color, COUNT(*) AS color_count
 FROM Car_sales 
 GROUP BY Color 
 ORDER BY color_count DESC 
-LIMIT 1;
+LIMIT 3;
 ```
 
 2.7 What is the distribution of car sales by transmission type (Auto vs. Manual)?
@@ -261,21 +261,29 @@ ORDER BY total_sales DESC
 LIMIT 1;
 ```
 
-3.3 What is the total revenue generated per dealer?
+3.3 List of dealers from highest to lowest number of car sales?
 ```sql
-SELECT Dealer_Name, SUM(Price) AS dealer_revenue 
+SELECT Dealer_Name, COUNT(*) AS total_sales
+FROM Car_sales
+GROUP BY Dealer_Name
+ORDER BY total_sales DESC LIMIT 30;
+```
+
+3.4 What is the total revenue generated per dealer?
+```sql
+SELECT Dealer_Name, SUM(REPLACE(Price, '$', '') + 0) AS dealer_revenue 
 FROM Car_sales 
 GROUP BY Dealer_Name 
 ORDER BY dealer_revenue DESC;
 ```
 
-3.4 What are the top 5 dealer regions with the highest number of sales?
+3.4 List of highest to lowest dealers regions with the highest number of sales?
 ```sql
 SELECT Dealer_Region, COUNT(*) AS total_sales 
 FROM Car_sales 
 GROUP BY Dealer_Region 
 ORDER BY total_sales DESC 
-LIMIT 5;
+LIMIT 7;
 ```
 
 3.5 What is the most common car brand (Company) sold by each dealer?
