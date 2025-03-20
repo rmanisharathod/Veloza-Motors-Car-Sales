@@ -2,7 +2,7 @@ Veloza Motors SQL Project - Car Sales Analysis
 
 Project Overview
 
-This project focuses on analyzing car sales data from Veloza Motors using SQL. The dataset contains information on customers, dealerships, car models, pricing, and sales trends. Through SQL queries, we aim to extract key insights related to **customer demographics, pricing patterns, dealer performance, and regional sales distribution.
+This project focuses on analyzing car sales data from Veloza Motors using SQL. The dataset contains information on customers, dealerships, car models, pricing, and sales trends. Through SQL queries, we aim to extract key insights related to customer demographics, pricing patterns, dealer performance, and regional sales distribution.
 
 
 Dataset Description
